@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="Queue" Id="{2b7de811-7be1-0bd1-2f1a-4b9eb91eca6a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Queue
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	bAddTailValue		: BOOL := TRUE;
+	bRemoveHeadValue	: BOOL := TRUE;
+	bCount				: BOOL := TRUE;
+	
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <LineIds Name="Queue">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
