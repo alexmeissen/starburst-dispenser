@@ -294,6 +294,7 @@ CASE MainState OF
 				Station[0].CurrentMover.SetVelocity(500);
                 Station[0].CurrentMover.MoveToStation(Station[1]);
 				
+				
 			END_IF
 			
 			
@@ -639,8 +640,10 @@ END_CASE
       <LineId Id="1550" Count="0" />
       <LineId Id="1536" Count="4" />
       <LineId Id="1542" Count="0" />
-      <LineId Id="1551" Count="1" />
+      <LineId Id="1622" Count="0" />
+      <LineId Id="1552" Count="0" />
       <LineId Id="1543" Count="1" />
+      <LineId Id="1627" Count="0" />
       <LineId Id="1534" Count="0" />
       <LineId Id="1521" Count="0" />
       <LineId Id="1337" Count="0" />

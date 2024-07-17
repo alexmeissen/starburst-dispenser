@@ -4611,7 +4611,7 @@ and will return to Group State Standby when the situation permits.
 	</ImageDatas>
 	<Project ProjectGUID="{E3FDD453-7143-4CBE-AF2D-E7E762464CFC}" TargetNetId="169.254.100.1.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
-			<Settings MaxCpus="20" RouterMemory="1073741824" MaxStackSize="256">
+			<Settings MaxCpus="6" NonWinCpus="2" RouterMemory="1073741824" MaxStackSize="256">
 				<Cpu CpuId="3"/>
 				<Cpu CpuId="4" BaseTime="2500"/>
 				<Cpu CpuId="5"/>
@@ -4630,7 +4630,7 @@ and will return to Group State Standby when the situation permits.
 					<Name>Job Task</Name>
 					<ImageId>327</ImageId>
 				</Task>
-				<Task Id="4" Priority="1" CycleTime="2500" AmsPort="351" Affinity="#x00000010" AdtTasks="true">
+				<Task Id="4" CreateSymbols="true" Priority="1" CycleTime="2500" AmsPort="351" Affinity="#x00000010" AdtTasks="true">
 					<Name>XTS Task 1</Name>
 				</Task>
 			</Tasks>
@@ -6307,7 +6307,7 @@ and will return to Group State Standby when the situation permits.
 							</Value>
 							<Value>
 								<Name>IdDetectionMode</Name>
-								<EnumText>Mover1</EnumText>
+								<EnumText>Standard</EnumText>
 							</Value>
 							<Value>
 								<Name>IdDiagConfiguration.floatBufferSize</Name>
@@ -33811,6 +33811,8 @@ and will return to Group State Standby when the situation permits.
 		</Io>
 	</Project>
 	<Mappings>
+		<MappingInfo Identifier="{08502001-0010-0500-0020-500810001205}" Id="#x02030020" Watchdog="04000000080000000400000004000000"/>
+		<MappingInfo Identifier="{08502001-0010-0500-0020-500850000403}" Id="#x02030010" Watchdog="04000000080000000400000004000000"/>
 		<OwnerA Name="TIID^Device 3 (EtherCAT)">
 			<OwnerB Name="TIRC^TcCOM Objects^XtsProcessingUnit 1^Part 1^Module 1">
 				<Link VarA="Term 1 (AT2002-0250)^CC Inputs^Current actual value Ch.1" VarB="Data Pointer^CurrentActualValues[0]"/>
@@ -34231,6 +34233,28 @@ and will return to Group State Standby when the situation permits.
 			<OwnerB Name="TIRC^TcCOM Objects^XtsProcessingUnit 1^Mover 4">
 				<Link VarA="SoftDrive 4^Data Pointer^InputPointer1" VarB="Inputs^SoftDriveInput"/>
 				<Link VarA="SoftDrive 4^Data Pointer^OutputPointer1" VarB="Outputs^SoftDriveOutput"/>
+			</OwnerB>
+		</OwnerA>
+		<OwnerA Name="TIPC^Main^Main Instance">
+			<OwnerB Name="TINC^NC SAF^Axes^Mover Axis 1">
+				<Link VarA="PlcTask Inputs^MAIN.Mover[0].AxisReference.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Outputs^MAIN.Mover[0].AxisReference.PlcToNc" VarB="Inputs^FromPlc"/>
+			</OwnerB>
+			<OwnerB Name="TINC^NC SAF^Axes^Mover Axis 2">
+				<Link VarA="PlcTask Inputs^MAIN.Mover[1].AxisReference.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Outputs^MAIN.Mover[1].AxisReference.PlcToNc" VarB="Inputs^FromPlc"/>
+			</OwnerB>
+			<OwnerB Name="TINC^NC SAF^Axes^Mover Axis 3">
+				<Link VarA="PlcTask Inputs^MAIN.Mover[2].AxisReference.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Outputs^MAIN.Mover[2].AxisReference.PlcToNc" VarB="Inputs^FromPlc"/>
+			</OwnerB>
+			<OwnerB Name="TINC^NC SAF^Axes^Mover Axis 4">
+				<Link VarA="PlcTask Inputs^MAIN.Mover[3].AxisReference.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Outputs^MAIN.Mover[3].AxisReference.PlcToNc" VarB="Inputs^FromPlc"/>
+			</OwnerB>
+			<OwnerB Name="TINC^NC SAF^Objects^Group1 (CA Group)">
+				<Link VarA="PlcTask Inputs^MAIN.GroupRef.NcToPlc" VarB="Group Outputs^ToPLC"/>
+				<Link VarA="PlcTask Outputs^MAIN.GroupRef.PlcToNc" VarB="Group Inputs^FromPLC"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>
