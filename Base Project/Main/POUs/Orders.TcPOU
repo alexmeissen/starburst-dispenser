@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="Orders" Id="{ede52384-732b-0532-3e54-f67f360bfd67}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM Orders
 VAR_INPUT
@@ -8,8 +8,8 @@ END_VAR
 
 VAR
 	queue 			: ARRAY[0..9] OF Order_TYP;
+	next_empty 		: INT := 0;
 	head 			: INT := 0;
-	tail 			: INT := 0;
 	first_order 	: INT := 0;
 	size 			: INT := 0;
 	MAX_SIZE 		: INT := 10;
@@ -23,43 +23,13 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-IF start THEN 
-	order1.order_num := 1;
-	order1.red := 2;
-	order1.orange := 1;
-	order1.pink := 3;
-	
-	order2.order_num := 2;
-	order2.red := 1;
-	order2.orange := 0;
-	order2.pink := 1;
-	
-	order3.order_num := 1;
-	order3.red := 2;
-	order3.orange := 2;
-	order3.pink := 1;
-	
-	
-	
-	Orders.ENQUEUE(order := order1);
-	Orders.ENQUEUE(order := order2);
-	Orders.ENQUEUE(order := order3);
-	
-	start := FALSE;
-	
-END_IF
-
-IF size > 0 THEN
-	has_order := TRUE;
-END_IF]]></ST>
+      <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="DEQUEUE" Id="{ecef24b9-48e7-0389-362f-9c7f81e427c2}">
       <Declaration><![CDATA[METHOD DEQUEUE : Order_TYP
 
 
 VAR
-	success : BOOL := FALSE;
 	order : Order_TYP;
 END_VAR
 
@@ -70,7 +40,6 @@ END_VAR
 IF size > 0 THEN
 	size := size - 1;
 	head := (head + 1) MOD MAX_SIZE;
-	success := TRUE;
 	
 END_IF]]></ST>
       </Implementation>
@@ -82,17 +51,15 @@ VAR_INPUT
     order : Order_TYP; // The order to add
 END_VAR
 VAR
-    success : BOOL := FALSE; // Indicates if the operation was successful
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[
 
 
 IF size < MAX_SIZE THEN
-	queue[tail] := order;
-    tail := (tail + 1) MOD MAX_SIZE; // Increment and wrap around
+	queue[next_empty] := order;
+    next_empty := (next_empty + 1) MOD MAX_SIZE; // Increment and wrap around
     size := size + 1;
-    success := TRUE;
 END_IF
 ]]></ST>
       </Implementation>
@@ -104,7 +71,11 @@ END_IF
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[HasOrder := has_order;]]></ST>
+          <ST><![CDATA[IF size > 0 THEN
+	HasOrder := TRUE;
+ELSE
+	HasOrder := FALSE;
+END_IF]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -117,7 +88,6 @@ END_VAR
         <Implementation>
           <ST><![CDATA[IF size > 0 THEN
 	order := queue[head];
-	head := (head + 1) MOD MAX_SIZE;
 END_IF
 	
 	]]></ST>
@@ -125,36 +95,26 @@ END_IF
       </Get>
     </Property>
     <LineIds Name="Orders">
-      <LineId Id="71" Count="0" />
-      <LineId Id="51" Count="0" />
-      <LineId Id="75" Count="18" />
-      <LineId Id="72" Count="0" />
-      <LineId Id="94" Count="2" />
-      <LineId Id="73" Count="0" />
-      <LineId Id="103" Count="0" />
-      <LineId Id="70" Count="0" />
-      <LineId Id="104" Count="1" />
+      <LineId Id="105" Count="0" />
     </LineIds>
     <LineIds Name="Orders.DEQUEUE">
       <LineId Id="8" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="16" Count="1" />
-      <LineId Id="19" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="10" Count="0" />
     </LineIds>
     <LineIds Name="Orders.ENQUEUE">
-      <LineId Id="16" Count="8" />
+      <LineId Id="16" Count="6" />
+      <LineId Id="24" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="Orders.HasOrder.Get">
-      <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="4" />
     </LineIds>
     <LineIds Name="Orders.order.Get">
       <LineId Id="7" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="10" Count="0" />
+      <LineId Id="9" Count="1" />
       <LineId Id="5" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>

@@ -71,9 +71,6 @@
     <Compile Include="POUs\Orders.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Queue.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="POUs\StarburstDispenser.TcPOU">
       <SubType>Code</SubType>
     </Compile>
