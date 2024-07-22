@@ -4611,7 +4611,7 @@ and will return to Group State Standby when the situation permits.
 	</ImageDatas>
 	<Project ProjectGUID="{E3FDD453-7143-4CBE-AF2D-E7E762464CFC}" TargetNetId="169.254.100.1.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
-			<Settings MaxCpus="6" NonWinCpus="2" RouterMemory="1073741824" MaxStackSize="256">
+			<Settings MaxCpus="20" RouterMemory="1073741824" MaxStackSize="256">
 				<Cpu CpuId="3"/>
 				<Cpu CpuId="4" BaseTime="2500"/>
 				<Cpu CpuId="5"/>
@@ -4620,6 +4620,7 @@ and will return to Group State Standby when the situation permits.
 			<Licenses>
 				<Target>
 					<ManualSelect>{57BD9670-089D-434A-85CF-90A857EE0EFF}</ManualSelect>
+					<ManualSelect>{97127BE5-AB00-4872-8A0E-0120D605FA10}</ManualSelect>
 				</Target>
 			</Licenses>
 			<Tasks>
@@ -17798,7 +17799,7 @@ and will return to Group State Standby when the situation permits.
 		</System>
 		<Motion>
 			<NC>
-				<SafTask Priority="8" CycleTime="20000" AmsPort="501" Affinity="#x00000020" IoAtBegin="true" SafTaskInfo="256">
+				<SafTask Priority="8" CycleTime="20000" AmsPort="501" Affinity="#x00000020" IoAtBegin="true" AmsNetId="169.254.1.63.1.1" SafTaskInfo="256">
 					<Name>NC SAF</Name>
 					<Vars VarGrpType="1" InsertType="1">
 						<Name>Inputs</Name>
@@ -31685,7 +31686,7 @@ and will return to Group State Standby when the situation permits.
 		</Motion>
 		<Plc>
 			<Project GUID="{DD3A0B29-8E7C-4E32-989D-B0222C998777}" Name="Main" PrjFilePath="Main\Main.plcproj" TmcFilePath="Main\Main.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Main\Main.tmc" TmcHash="{86B0A1FB-4736-A300-96E9-A8421F20543E}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Main\Main.tmc" TmcHash="{0F54D89E-8DEF-848F-9546-2B32EB6FEB98}">
 					<Name>Main Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
