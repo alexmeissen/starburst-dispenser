@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <VisuManager Name="Visualization Manager" Id="{33a0cfe5-2fc4-0d20-28f8-5d332477a831}">
     <XmlArchive>
       <Data>
