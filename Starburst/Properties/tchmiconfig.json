@@ -50,13 +50,18 @@
       "name": "Fonts/Fonts.css",
       "description": "",
       "type": "Stylesheet"
+    },
+    {
+      "name": "CustomFunctions/FunctionJS1.js",
+      "description": "",
+      "type": "JavaScript"
     }
   ],
   "userControls": [],
   "content": [],
   "views": [
     {
-      "url": "Mobile.view",
+      "url": "Pendant.view",
       "preload": false,
       "keepAlive": false,
       "preloadBindings": false
@@ -68,12 +73,62 @@
       "preloadBindings": false
     }
   ],
-  "userFunctions": [],
+  "userFunctions": [
+    {
+      "url": "CustomFunctions/FunctionJS1.js"
+    }
+  ],
   "symbols": {
     "internal": {},
     "themedResources": {}
   },
-  "trigger": [],
+  "trigger": [
+    {
+      "event": "onInitialized",
+      "actions": [
+        {
+          "objectType": "Condition",
+          "active": true,
+          "parts": [
+            {
+              "if": [
+                {
+                  "compare1": {
+                    "objectType": "Symbol",
+                    "valueType": "tchmi:general#/definitions/String",
+                    "symbolExpression": "%f%TcHmi.Functions.Starburst.FunctionJS1('view')%/f%"
+                  },
+                  "compare2": {
+                    "objectType": "StaticValue",
+                    "valueType": "tchmi:general#/definitions/String",
+                    "value": "pendant"
+                  },
+                  "compareOperator": "==",
+                  "logic": null
+                }
+              ],
+              "then": [
+                {
+                  "objectType": "JavaScript",
+                  "active": true,
+                  "sourceLines": [
+                    "TcHmi.View.load('Pendant.view', function(data){ });"
+                  ],
+                  "injectContextObject": false,
+                  "asyncWait": true,
+                  "waitMode": "Synchronous"
+                }
+              ]
+            },
+            {
+              "else": []
+            }
+          ],
+          "asyncWait": true
+        }
+      ]
+    }
+  ],
   "actionTemplates": [],
   "languages": {
     "de": "Localization/de.localization",
