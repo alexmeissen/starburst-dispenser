@@ -70,7 +70,7 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput::Value%/ctrl%"
+          "symbolExpression": "%ctrl%TcHmiSpinboxInput_3::Value%/ctrl%"
         },
         "asyncWait": true
       }
@@ -138,7 +138,7 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_1::Value%/ctrl%"
+          "symbolExpression": "%ctrl%TcHmiSpinboxInput_4::Value%/ctrl%"
         },
         "asyncWait": true
       }
@@ -184,7 +184,7 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_2::Value%/ctrl%"
+          "symbolExpression": "%ctrl%TcHmiSpinboxInput_5::Value%/ctrl%"
         },
         "asyncWait": true
       }
@@ -309,5 +309,37 @@
 <div id="TcHmiTextblock_17" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="375" data-tchmi-left-unit="px" data-tchmi-text="num_signal" data-tchmi-top="377" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
 </div>
 <div id="TcHmiTextblock_18" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="377" data-tchmi-left-unit="px" data-tchmi-text="gvl ordern num" data-tchmi-top="430" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="TcHmiSpinboxInput_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiSpinboxInput" data-tchmi-auto-focus-out="true" data-tchmi-decimal-digits="0" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="370" data-tchmi-left-unit="px" data-tchmi-max-value="3" data-tchmi-min-value="0" data-tchmi-reset-to-last-valid-value="true" data-tchmi-top="195" data-tchmi-top-unit="px" data-tchmi-value="0" data-tchmi-value-horizontal-alignment="Center" data-tchmi-width="150" data-tchmi-width-unit="px">
+<script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
+{
+  "top": 3,
+  "right": 3,
+  "bottom": 3,
+  "left": 3
+}
+</script>
+
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "TcHmiSpinboxInput_6.onValueChanged",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%Base Project.MAIN.red%/s%",
+        "value": {
+          "objectType": "Symbol",
+          "valueType": "tchmi:general#/definitions/String",
+          "symbolExpression": "%ctrl%TcHmiSpinboxInput_6::Value%/ctrl%"
+        },
+        "asyncWait": true
+      }
+    ]
+  }
+]
+</script>
 </div>
 </div>
