@@ -79,7 +79,20 @@
     }
   ],
   "symbols": {
-    "internal": {},
+    "internal": {
+      "currentorder": {
+        "value": 0,
+        "type": "tchmi:general#/definitions/INT",
+        "persist": false,
+        "readonly": false
+      },
+      "Order_state": {
+        "value": "Undefined",
+        "type": "tchmi:general#/definitions/String",
+        "persist": false,
+        "readonly": false
+      }
+    },
     "themedResources": {}
   },
   "trigger": [
@@ -129,7 +142,69 @@
       ]
     }
   ],
-  "actionTemplates": [],
+  "actionTemplates": [
+    {
+      "displayname": "state",
+      "name": "state",
+      "category": "Action Templates",
+      "actions": [
+        {
+          "objectType": "Condition",
+          "active": true,
+          "parts": [
+            {
+              "if": [
+                {
+                  "compare1": {
+                    "objectType": "Symbol",
+                    "valueType": "tchmi:general#/definitions/String",
+                    "symbolExpression": "%i%currentorder%/i%"
+                  },
+                  "compare2": {
+                    "objectType": "Symbol",
+                    "valueType": "tchmi:general#/definitions/String",
+                    "symbolExpression": "%s%Base Project.MAIN.order_num_signal%/s%"
+                  },
+                  "compareOperator": "==",
+                  "logic": null
+                }
+              ],
+              "then": [
+                {
+                  "objectType": "WriteToSymbol",
+                  "active": true,
+                  "symbolExpression": "%i%Order_state%/i%",
+                  "value": {
+                    "objectType": "StaticValue",
+                    "valueType": "tchmi:general#/definitions/String",
+                    "value": "ready"
+                  },
+                  "asyncWait": true
+                }
+              ]
+            },
+            {
+              "else": [
+                {
+                  "objectType": "WriteToSymbol",
+                  "active": true,
+                  "symbolExpression": "%i%Order_state%/i%",
+                  "value": {
+                    "objectType": "StaticValue",
+                    "valueType": "tchmi:general#/definitions/String",
+                    "value": "not ready"
+                  },
+                  "asyncWait": true
+                }
+              ]
+            }
+          ],
+          "asyncWait": true
+        }
+      ],
+      "parameters": []
+    }
+  ],
   "languages": {
     "de": "Localization/de.localization",
     "en": "Localization/en.localization"

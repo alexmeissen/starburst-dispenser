@@ -69,8 +69,9 @@ VAR
 	bconfirm_order: BOOL := FALSE;
 	bpicked_up: BOOL;
 	
-	order_num_signal: INT;
+	order_num_signal: INT := 0;
 	temp: Payload_TYP;
+	number: INT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[	
@@ -268,13 +269,15 @@ CASE MainState OF
 			hmi_order.red := red;
 			hmi_order.orange := orange;
 			hmi_order.pink := pink;
-			GVL.order_number := GVL.order_number + 1;
+			
 			
 			//enqueues order
 			Orders.ENQUEUE(hmi_order);
 			// sets temporary variable holding the order information for the mover
 			current_order := Orders.order;
 			bconfirm_order := FALSE;
+			//number := hmi_order.order_num;
+			GVL.order_number := GVL.order_number + 1;
 		END_IF
 		
 		
@@ -617,6 +620,8 @@ END_CASE
       <LineId Id="1854" Count="0" />
       <LineId Id="1776" Count="0" />
       <LineId Id="1778" Count="0" />
+      <LineId Id="1940" Count="0" />
+      <LineId Id="2066" Count="0" />
       <LineId Id="1768" Count="0" />
       <LineId Id="1760" Count="0" />
       <LineId Id="1755" Count="0" />

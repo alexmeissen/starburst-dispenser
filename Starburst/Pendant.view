@@ -25,6 +25,27 @@
 </script>
 
 
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "TcHmiButton_6.onPressed",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%i%currentorder%/i%",
+        "value": {
+          "objectType": "Symbol",
+          "valueType": "tchmi:general#/definitions/String",
+          "symbolExpression": "%f%%s%Base Project.GVL.order_number%/s% - 1%/f%"
+        },
+        "asyncWait": true
+      }
+    ]
+  }
+]
+</script>
 </div>
 <div id="TcHmiSpinboxInput_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiSpinboxInput" data-tchmi-auto-focus-out="true" data-tchmi-decimal-digits="0" data-tchmi-height="33" data-tchmi-height-unit="px" data-tchmi-left="66" data-tchmi-left-unit="px" data-tchmi-max-value="3" data-tchmi-min-value="0" data-tchmi-reset-to-last-valid-value="true" data-tchmi-top="176" data-tchmi-top-unit="px" data-tchmi-value-horizontal-alignment="Center" data-tchmi-width="103" data-tchmi-width-unit="px" data-tchmi-value="0" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-zindex="1">
 <script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
@@ -194,15 +215,80 @@
 }
 </script>
 </div>
-<div id="TcHmiTextblock_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="275" data-tchmi-left-unit="px" data-tchmi-top="441" data-tchmi-top-unit="px" data-tchmi-width="32" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text="%s%Base Project.MAIN.order_num_signal%/s%" data-tchmi-zindex="1">
+<div id="TcHmiTextblock_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="92" data-tchmi-left-unit="px" data-tchmi-top="424" data-tchmi-top-unit="px" data-tchmi-width="121" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-text="%i%Order_state%/i%" data-tchmi-zindex="1">
+
+
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "%i%Order_state%/i%",
+    "actions": [
+      {
+        "objectType": "Condition",
+        "active": true,
+        "parts": [
+          {
+            "if": [
+              {
+                "compare1": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/INT",
+                  "symbolExpression": "%s%Base Project.MAIN.order_num_signal%/s%"
+                },
+                "compare2": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "symbolExpression": "%i%currentorder%/i%"
+                },
+                "compareOperator": "==",
+                "logic": null
+              }
+            ],
+            "then": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%i%Order_state%/i%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": "ready"
+                },
+                "asyncWait": true
+              }
+            ]
+          },
+          {
+            "else": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%i%Order_state%/i%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": "not ready"
+                },
+                "asyncWait": true
+              }
+            ]
+          }
+        ],
+        "asyncWait": true
+      }
+    ]
+  }
+]
+</script>
 </div>
 <div id="TcHmi_Controls_Beckhoff_TcHmiImage" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="158" data-tchmi-height-unit="px" data-tchmi-left="228" data-tchmi-left-unit="px" data-tchmi-src="Images/starbursts together.png" data-tchmi-top="40" data-tchmi-top-unit="px" data-tchmi-width="137" data-tchmi-width-unit="px" data-tchmi-zindex="1">
 </div>
-<div id="TcHmiTextblock_9" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="66" data-tchmi-left-unit="px" data-tchmi-text="Your order number is: 
+<div id="TcHmiTextblock_9" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="29" data-tchmi-left-unit="px" data-tchmi-text="Your order number is: 
 
-" data-tchmi-top="441" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="1">
+" data-tchmi-top="377" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="1">
 </div>
-<div id="TcHmiTextblock_10" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="207" data-tchmi-left-unit="px" data-tchmi-text="Order number      is ready" data-tchmi-top="441" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="0">
+<div id="TcHmiTextblock_10" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="29" data-tchmi-left-unit="px" data-tchmi-text="Your order is " data-tchmi-top="424" data-tchmi-top-unit="px" data-tchmi-width="158" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-zindex="0">
 </div>
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
@@ -210,4 +296,18 @@
   "color": "rgba(244, 16, 81, 1)"
 }
 </script>
+<div id="TcHmiTextblock_12" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="140" data-tchmi-left-unit="px" data-tchmi-text="%i%currentorder%/i%" data-tchmi-top="377" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="TcHmiTextblock_13" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="537" data-tchmi-left-unit="px" data-tchmi-text="%i%currentorder%/i%" data-tchmi-top="319" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="TcHmiTextblock_14" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="537" data-tchmi-left-unit="px" data-tchmi-text="%s%Base Project.MAIN.order_num_signal%/s%" data-tchmi-top="377" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="TcHmiTextblock_15" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="535" data-tchmi-left-unit="px" data-tchmi-text="%s%Base Project.GVL.order_number%/s%" data-tchmi-top="430" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="TcHmiTextblock_16" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="375" data-tchmi-left-unit="px" data-tchmi-text="current order (internal)" data-tchmi-top="319" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="TcHmiTextblock_17" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="375" data-tchmi-left-unit="px" data-tchmi-text="num_signal" data-tchmi-top="377" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
+<div id="TcHmiTextblock_18" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="26" data-tchmi-height-unit="px" data-tchmi-left="377" data-tchmi-left-unit="px" data-tchmi-text="gvl ordern num" data-tchmi-top="430" data-tchmi-top-unit="px" data-tchmi-width="150" data-tchmi-width-unit="px" data-tchmi-word-wrap="true">
+</div>
 </div>
