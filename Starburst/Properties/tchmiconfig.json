@@ -50,13 +50,18 @@
       "name": "Fonts/Fonts.css",
       "description": "",
       "type": "Stylesheet"
+    },
+    {
+      "name": "CustomFunctions/FunctionJS1.js",
+      "description": "",
+      "type": "JavaScript"
     }
   ],
   "userControls": [],
   "content": [],
   "views": [
     {
-      "url": "Mobile.view",
+      "url": "Pendant.view",
       "preload": false,
       "keepAlive": false,
       "preloadBindings": false
@@ -68,13 +73,138 @@
       "preloadBindings": false
     }
   ],
-  "userFunctions": [],
+  "userFunctions": [
+    {
+      "url": "CustomFunctions/FunctionJS1.js"
+    }
+  ],
   "symbols": {
-    "internal": {},
+    "internal": {
+      "currentorder": {
+        "value": 0,
+        "type": "tchmi:general#/definitions/INT",
+        "persist": false,
+        "readonly": false
+      },
+      "Order_state": {
+        "value": "Undefined",
+        "type": "tchmi:general#/definitions/String",
+        "persist": false,
+        "readonly": false
+      }
+    },
     "themedResources": {}
   },
-  "trigger": [],
-  "actionTemplates": [],
+  "trigger": [
+    {
+      "event": "onInitialized",
+      "actions": [
+        {
+          "objectType": "Condition",
+          "active": true,
+          "parts": [
+            {
+              "if": [
+                {
+                  "compare1": {
+                    "objectType": "Symbol",
+                    "valueType": "tchmi:general#/definitions/String",
+                    "symbolExpression": "%f%TcHmi.Functions.Starburst.FunctionJS1('view')%/f%"
+                  },
+                  "compare2": {
+                    "objectType": "StaticValue",
+                    "valueType": "tchmi:general#/definitions/String",
+                    "value": "pendant"
+                  },
+                  "compareOperator": "==",
+                  "logic": null
+                }
+              ],
+              "then": [
+                {
+                  "objectType": "JavaScript",
+                  "active": true,
+                  "sourceLines": [
+                    "TcHmi.View.load('Pendant.view', function(data){ });"
+                  ],
+                  "injectContextObject": false,
+                  "asyncWait": true,
+                  "waitMode": "Synchronous"
+                }
+              ]
+            },
+            {
+              "else": []
+            }
+          ],
+          "asyncWait": true
+        }
+      ]
+    }
+  ],
+  "actionTemplates": [
+    {
+      "displayname": "state",
+      "name": "state",
+      "category": "Action Templates",
+      "actions": [
+        {
+          "objectType": "Condition",
+          "active": true,
+          "parts": [
+            {
+              "if": [
+                {
+                  "compare1": {
+                    "objectType": "Symbol",
+                    "valueType": "tchmi:general#/definitions/String",
+                    "symbolExpression": "%i%currentorder%/i%"
+                  },
+                  "compare2": {
+                    "objectType": "Symbol",
+                    "valueType": "tchmi:general#/definitions/String",
+                    "symbolExpression": "%s%Base Project.MAIN.order_num_signal%/s%"
+                  },
+                  "compareOperator": "==",
+                  "logic": null
+                }
+              ],
+              "then": [
+                {
+                  "objectType": "WriteToSymbol",
+                  "active": true,
+                  "symbolExpression": "%i%Order_state%/i%",
+                  "value": {
+                    "objectType": "StaticValue",
+                    "valueType": "tchmi:general#/definitions/String",
+                    "value": "ready"
+                  },
+                  "asyncWait": true
+                }
+              ]
+            },
+            {
+              "else": [
+                {
+                  "objectType": "WriteToSymbol",
+                  "active": true,
+                  "symbolExpression": "%i%Order_state%/i%",
+                  "value": {
+                    "objectType": "StaticValue",
+                    "valueType": "tchmi:general#/definitions/String",
+                    "value": "not ready"
+                  },
+                  "asyncWait": true
+                }
+              ]
+            }
+          ],
+          "asyncWait": true
+        }
+      ],
+      "parameters": []
+    }
+  ],
   "languages": {
     "de": "Localization/de.localization",
     "en": "Localization/en.localization"

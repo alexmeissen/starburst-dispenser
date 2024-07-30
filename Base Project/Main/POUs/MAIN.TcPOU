@@ -69,8 +69,9 @@ VAR
 	bconfirm_order: BOOL := FALSE;
 	bpicked_up: BOOL;
 	
-	order_num_signal: INT;
+	order_num_signal: INT := 0;
 	temp: Payload_TYP;
+	number: INT;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[	
@@ -199,7 +200,7 @@ CASE MainState OF
 		
 		// Track 0 is a special case absolute reference, no-modulus track instance and is not normally used
 		Track[0].OTCID := 0;				// special "absolute reference" case
-		Track[1].OTCID:= 16#01010290;		// value copied from XtsProcessingUnit1 > Track x > Object > Object Id field
+		Track[1].OTCID:= 16#01010060;		// value copied from XtsProcessingUnit1 > Track x > Object > Object Id field
 
 		MainState := MS_ACTIVATE_TRACKS;
 		
@@ -268,13 +269,15 @@ CASE MainState OF
 			hmi_order.red := red;
 			hmi_order.orange := orange;
 			hmi_order.pink := pink;
-			GVL.order_number := GVL.order_number + 1;
+			
 			
 			//enqueues order
 			Orders.ENQUEUE(hmi_order);
 			// sets temporary variable holding the order information for the mover
 			current_order := Orders.order;
 			bconfirm_order := FALSE;
+			//number := hmi_order.order_num;
+			GVL.order_number := GVL.order_number + 1;
 		END_IF
 		
 		
@@ -617,6 +620,8 @@ END_CASE
       <LineId Id="1854" Count="0" />
       <LineId Id="1776" Count="0" />
       <LineId Id="1778" Count="0" />
+      <LineId Id="1940" Count="0" />
+      <LineId Id="2066" Count="0" />
       <LineId Id="1768" Count="0" />
       <LineId Id="1760" Count="0" />
       <LineId Id="1755" Count="0" />

@@ -27,7 +27,7 @@
     <HmiViewportUserScaleable>Default</HmiViewportUserScaleable>
     <HmiPostProcessing>True</HmiPostProcessing>
     <Name>Starburst</Name>
-    <HmiCommunicationRouterPort>10107</HmiCommunicationRouterPort>
+    <HmiCommunicationRouterPort>10109</HmiCommunicationRouterPort>
     <HmiCommunicationServerAuthPort>13001</HmiCommunicationServerAuthPort>
     <HmiInitial>1.12.760.59</HmiInitial>
     <HmiRecent>1.12.760.59</HmiRecent>
@@ -110,7 +110,29 @@
   <Target Name="Clean" DependsOnTargets="$(CleanDependsOn)" />
   <Target Name="ReBuild" DependsOnTargets="Clean; Build" />
   <ItemGroup>
-    <Content Include="Mobile.view">
+    <Content Include="CustomFunctions\FunctionJS1.function.json">
+      <SubType>Content</SubType>
+      <DependentUpon>CustomFunctions\FunctionJS1.js</DependentUpon>
+    </Content>
+    <Content Include="CustomFunctions\FunctionJS1.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\download.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\pink-circle.jpg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\pink.svg">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\single-pink.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Images\starbursts together.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Pendant.view">
       <SubType>Content</SubType>
     </Content>
     <Folder Include="Fonts\" />
@@ -121,6 +143,7 @@
     <Folder Include="Imports\Videos" />
     <Folder Include="KeyboardLayouts\" />
     <Folder Include="Localization" />
+    <Folder Include="CustomFunctions" />
     <Folder Include="Themes" />
     <Folder Include="Themes\Base-Dark\Images\" />
     <Folder Include="Themes\Base\" />

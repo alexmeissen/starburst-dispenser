@@ -1208,6 +1208,16 @@
             },
             "USEMAPPING": true
         },
+        "Base Project.GVL.order_number": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "Base Project::GVL::order_number",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/INT"
+            },
+            "USEMAPPING": true
+        },
         "Base Project.MAIN.MainCommands.Disable": {
             "ACCESS": 3,
             "DOMAIN": "ADS",
@@ -3556,6 +3566,7 @@
                 "ADS.AdsSyncReadStateReq": 3,
                 "ADS.CheckLicense": 3,
                 "ADS.Diagnostics": 1,
+                "Base Project.GVL.order_number": 3,
                 "Base Project.MAIN.MainCommands.Disable": 3,
                 "Base Project.MAIN.MainCommands.Enable": 3,
                 "Base Project.MAIN.MainCommands.Start": 3,
