@@ -1370,6 +1370,16 @@
             },
             "USEMAPPING": true
         },
+        "Base Project.MAIN.update": {
+            "ACCESS": 3,
+            "DOMAIN": "ADS",
+            "DYNAMIC": true,
+            "MAPPING": "Base Project::MAIN::update",
+            "SCHEMA": {
+                "$ref": "tchmi:general#/definitions/BOOL"
+            },
+            "USEMAPPING": true
+        },
         "ChangeUserSettings": {
             "ACCESS": 3,
             "DOMAIN": "TcHmiSrv",
@@ -3579,6 +3589,7 @@
                 "Base Project.MAIN.picked_up": 3,
                 "Base Project.MAIN.pink": 3,
                 "Base Project.MAIN.red": 3,
+                "Base Project.MAIN.update": 3,
                 "ChangeUserSettings": 3,
                 "ConfirmAlarm": 3,
                 "CreateEvent": 3,

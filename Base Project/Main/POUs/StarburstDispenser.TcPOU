@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
   <POU Name="StarburstDispenser" Id="{0b1de97b-16c5-08d3-29a7-e99e21337a19}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK StarburstDispenser
 VAR_INPUT
@@ -7,6 +7,7 @@ VAR_INPUT
 	timer : TON;
 	station_num : INT;
 	dispense : BOOL;
+	Axis : FB_BasicAxis;
 END_VAR
 VAR_OUTPUT
 	completed : BOOL;
@@ -16,14 +17,19 @@ VAR
 	i: INT;
 	temp : Payload_TYP;
 	seconds: TIME;
-	
+	inposition : BOOL := Axis.InPosition;
+	count : INT := 0;
+	pos : LREAL := Axis.ActualPosition;
+	movedistance: LREAL;
+	veloc : LREAL := 6000.0;
+	state: INT := 0;
 END_VAR
 
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[
 
-completed := false;
+completed := FALSE;
 
 //take ou for
 // add case
@@ -36,13 +42,15 @@ IF dispense THEN
 	aAmount[1] := temp.Red;
 	aAmount[2] := temp.Orange;
 	aAmount[3] := temp.Pink;
-	seconds := T#1000MS * aAmount[station_num];
+	movedistance := (360) * aAmount[station_num];
 	
 	CASE station_num OF
 		
 		1: 
-			//motor 1 logic
-			timer(IN := TRUE, PT := seconds);
+			
+			Axis.Velocity := 600;
+			Axis.MoveRelative(360, TRUE);
+
 		2:
 			//motor 2 logic
 			timer(IN := TRUE, PT := seconds);
@@ -50,76 +58,27 @@ IF dispense THEN
 		3:
 			//motor 3 logic
 			timer(IN := TRUE, PT := seconds);
+			
+		4:
+				completed := TRUE;
+				Axis.Stop();
 		
 	END_CASE
 END_IF
 
 completed := Timer.Q;
+//completed := Axis.InPosition;
 
 IF NOT dispense THEN
 	TIMER(IN := FALSE);
+	Axis.Stop();
 END_IF
-
-
-
-
-
-
-
-
-
-//FOR i := 0 TO aAmount[station_num] DO
-	//IF station_num = 1 THEN
-	//	//motor 1 logic
-	//	timer(IN := TRUE, PT := T#1000MS);
-		
-		
-	//ELSIF station_num = 2 THEN
-//		// motor 2 logic
-	//	timer(IN := TRUE, PT := T#1000MS);
-		
-	//ELSIF station_num = 3 THEN
-//		//motor 3 logic
-//		timer(IN := TRUE, PT := T#1000MS);
-		
-  //  END_IF;
-	
-	
-	
-//END_FOR]]></ST>
+]]></ST>
     </Implementation>
     <LineIds Name="StarburstDispenser">
       <LineId Id="26" Count="0" />
       <LineId Id="37" Count="0" />
-      <LineId Id="158" Count="1" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="160" Count="0" />
-      <LineId Id="176" Count="0" />
-      <LineId Id="175" Count="0" />
-      <LineId Id="225" Count="0" />
-      <LineId Id="227" Count="0" />
-      <LineId Id="162" Count="0" />
-      <LineId Id="235" Count="2" />
-      <LineId Id="234" Count="0" />
-      <LineId Id="232" Count="1" />
-      <LineId Id="163" Count="0" />
-      <LineId Id="170" Count="1" />
-      <LineId Id="185" Count="0" />
-      <LineId Id="172" Count="0" />
-      <LineId Id="179" Count="0" />
-      <LineId Id="186" Count="0" />
-      <LineId Id="168" Count="0" />
-      <LineId Id="181" Count="1" />
-      <LineId Id="188" Count="0" />
-      <LineId Id="183" Count="1" />
-      <LineId Id="164" Count="0" />
-      <LineId Id="228" Count="0" />
-      <LineId Id="161" Count="0" />
-      <LineId Id="218" Count="0" />
-      <LineId Id="229" Count="0" />
-      <LineId Id="154" Count="0" />
-      <LineId Id="230" Count="1" />
-      <LineId Id="191" Count="26" />
+      <LineId Id="373" Count="43" />
       <LineId Id="190" Count="0" />
     </LineIds>
   </POU>

@@ -72,6 +72,19 @@ VAR
 	order_num_signal: INT := 0;
 	temp: Payload_TYP;
 	number: INT;
+	
+	Axis1 : FB_BasicAxis;
+	Axis2 : FB_BasicAxis;
+	Axis3 : FB_BasicAxis;
+	
+	state1: INT;
+	state2: INT;
+	state3: INT;
+	
+	spin: INT;
+	temporary: Payload_TYP;
+	
+	update: BOOL;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[	
@@ -165,6 +178,10 @@ CASE MainState OF
                 allMoversEnabled 		:= FALSE;
             END_IF
         END_FOR
+		
+		Axis1.Enable();
+		Axis2.Enable();
+		Axis3.Enable();
 
         IF allMoversEnabled THEN
 			IF MainCommands.Disable THEN
@@ -289,6 +306,7 @@ CASE MainState OF
 			//Check if there is an order available
 			IF Orders.HasOrder THEN
 				
+				
 				//delete order off of the queue
 				Orders.DEQUEUE();
 	
@@ -309,66 +327,99 @@ CASE MainState OF
 				
 			END_IF
        END_IF
+	  
 		
         // Station 1 Logig for Red starbursts	
-        IF Station[1].MoverInPosition THEN
+		CASE state1 OF 
+			0 :
+			IF Station[1].MoverInPosition THEN 
+				temporary := Station[1].CurrentMover.Payload;
+				Axis3.Velocity := 7000;
+				//Axis3.Deceleration := 8000;
+				spin := temporary.Red * 360;
+				IF(Axis3.MoveRelative(spin, TRUE))THEN
+				state1 := 1;
+				END_IF
+			END_IF
+			1 :
+				IF NOT(Axis3.Busy) THEN
+				Station[1].CurrentMover.SetVelocity(500);
+                Station[1].CurrentMover.MoveToStation(Station[2]);
+				state1 :=0 ;
+				END_IF
+			
+		END_CASE
+        //IF Station[1].MoverInPosition THEN
 			
 			// dispenses red starbursts
-			SB_dispensers[1](mover := Station[1].currentMover, station_num := 1, dispense := TRUE);
+		//	SB_dispensers[1](mover := Station[1].currentMover, station_num := 1, dispense := TRUE, Axis := Axis3);
 			
 			//when done dispensing mover goes to next station
-			IF SB_dispensers[1].completed THEN;
-				SB_dispensers[1](mover := Station[1].currentMover, station_num := 1, dispense := FALSE);
-                Station[1].CurrentMover.SetVelocity(500);
-                Station[1].CurrentMover.MoveToStation(Station[2]);
-            END_IF
+		//	IF SB_dispensers[1].completed THEN;
+		//		SB_dispensers[1](mover := Station[1].currentMover, station_num := 1, dispense := FALSE);
+         //       Station[1].CurrentMover.SetVelocity(500);
+         //       Station[1].CurrentMover.MoveToStation(Station[2]);
+         //   END_IF
 			
-        END_IF
+     //   END_IF
 		
 		//Station 2 logic for Orange starbursts
-		IF Station[2].MoverInPosition THEN
-            
-			// dispenses orange starbursts
-			SB_dispensers[2](mover := Station[2].currentMover, station_num := 2, dispense := TRUE);
-			
-			//when done dispensing mover goes to next station
-			IF SB_dispensers[2].completed THEN
-                Station[2].CurrentMover.SetVelocity(500);
+		CASE state2 OF 
+			0 :
+			IF Station[2].MoverInPosition THEN 
+				temporary := Station[2].CurrentMover.Payload;
+				Axis2.Velocity := 7000;
+				//Axis2.Deceleration := 8000;
+				spin := temporary.Orange * 360;
+				IF(Axis2.MoveRelative(spin, TRUE))THEN
+				state2 := 1;
+				END_IF
+			END_IF
+			1 :
+				IF NOT(Axis2.Busy) THEN
+				Station[2].CurrentMover.SetVelocity(500);
                 Station[2].CurrentMover.MoveToStation(Station[3]);
-				SB_dispensers[2](mover := Station[2].currentMover, station_num := 2, dispense := FALSE);
-            END_IF
-  
-        END_IF
+				state2 :=0 ;
+				END_IF
+			
+		END_CASE
 		
 		
 		
 		//Station 3 logic for Pink starbursts
-		IF Station[3].MoverInPosition THEN
-			
-			//dispense pink starbursts
-			SB_dispensers[3](mover := Station[3].currentMover, station_num := 3, dispense := TRUE);
-			
-			//when done dispensing mover goes to next station
-			IF SB_dispensers[3].completed THEN
-                Station[3].CurrentMover.SetVelocity(500);
+		CASE state3 OF 
+			0 :
+			IF Station[3].MoverInPosition THEN 
+				temporary := Station[3].CurrentMover.Payload;
+				Axis1.Velocity := 7000;
+				//Axis1.Deceleration := 8000;
+				spin := temporary.Pink * 360;
+				IF(Axis1.MoveRelative(spin, TRUE))THEN
+				state3 := 1;
+				END_IF
+			END_IF
+			1 :
+				IF NOT(Axis1.Busy) THEN
+				Station[3].CurrentMover.SetVelocity(500);
                 Station[3].CurrentMover.MoveToStation(Station[4]);
-				SB_dispensers[3](mover := Station[3].currentMover, station_num := 3, dispense := FALSE);
-            END_IF
+				state3 :=0 ;
+				END_IF
 			
-        END_IF
+		END_CASE
 		
 		
 		
 		//Station 4 logic for pickup station
 		IF Station[4].MoverInPosition THEN
             
+			update := TRUE;
 			temp := Station[4].CurrentMover.Payload;
 			order_num_signal := temp.Order_Num;
 			
 		
 			// Once picked up, move back to starting station
             IF bpicked_up THEN
-				
+				update := FALSE;
 				// Ping signal to Orders.queue[Orders.first_order] for that order_num
                 Station[4].CurrentMover.SetVelocity(1000);
                 Station[4].CurrentMover.MoveToStation(Station[0]);
@@ -537,7 +588,9 @@ SB_dispensers[1]();
 SB_dispensers[2]();
 SB_dispensers[3]();
 
-
+Axis1.CyclicLogic();
+Axis2.CyclicLogic();
+Axis3.CyclicLogic();
 ]]></ST>
     </Implementation>
     <Action Name="InitializeUtilityLibrary" Id="{4ac3b602-bbee-0af7-24db-b9d89bbd3ae5}">
@@ -598,7 +651,12 @@ END_CASE
     <LineIds Name="MAIN">
       <LineId Id="660" Count="8" />
       <LineId Id="1691" Count="0" />
-      <LineId Id="670" Count="98" />
+      <LineId Id="670" Count="80" />
+      <LineId Id="2147" Count="0" />
+      <LineId Id="2144" Count="0" />
+      <LineId Id="2146" Count="0" />
+      <LineId Id="2145" Count="0" />
+      <LineId Id="751" Count="17" />
       <LineId Id="770" Count="0" />
       <LineId Id="772" Count="0" />
       <LineId Id="774" Count="0" />
@@ -632,6 +690,7 @@ END_CASE
       <LineId Id="1548" Count="0" />
       <LineId Id="1533" Count="0" />
       <LineId Id="1856" Count="0" />
+      <LineId Id="2385" Count="0" />
       <LineId Id="1855" Count="0" />
       <LineId Id="1777" Count="0" />
       <LineId Id="1553" Count="0" />
@@ -645,7 +704,28 @@ END_CASE
       <LineId Id="1627" Count="0" />
       <LineId Id="1534" Count="0" />
       <LineId Id="1521" Count="0" />
-      <LineId Id="894" Count="3" />
+      <LineId Id="894" Count="0" />
+      <LineId Id="2167" Count="0" />
+      <LineId Id="895" Count="1" />
+      <LineId Id="2148" Count="1" />
+      <LineId Id="2152" Count="0" />
+      <LineId Id="2156" Count="0" />
+      <LineId Id="2178" Count="0" />
+      <LineId Id="2259" Count="0" />
+      <LineId Id="2153" Count="0" />
+      <LineId Id="2158" Count="0" />
+      <LineId Id="2160" Count="0" />
+      <LineId Id="2174" Count="0" />
+      <LineId Id="2154" Count="0" />
+      <LineId Id="2161" Count="0" />
+      <LineId Id="2176" Count="0" />
+      <LineId Id="2164" Count="0" />
+      <LineId Id="2166" Count="0" />
+      <LineId Id="2175" Count="0" />
+      <LineId Id="2177" Count="0" />
+      <LineId Id="2162" Count="0" />
+      <LineId Id="2150" Count="0" />
+      <LineId Id="897" Count="0" />
       <LineId Id="1217" Count="0" />
       <LineId Id="1857" Count="0" />
       <LineId Id="1366" Count="0" />
@@ -659,34 +739,18 @@ END_CASE
       <LineId Id="909" Count="0" />
       <LineId Id="1158" Count="0" />
       <LineId Id="1179" Count="0" />
-      <LineId Id="1161" Count="1" />
-      <LineId Id="1355" Count="0" />
-      <LineId Id="1357" Count="1" />
-      <LineId Id="1858" Count="0" />
-      <LineId Id="1368" Count="0" />
-      <LineId Id="1164" Count="1" />
-      <LineId Id="1451" Count="0" />
-      <LineId Id="1166" Count="1" />
+      <LineId Id="2264" Count="17" />
       <LineId Id="1160" Count="0" />
       <LineId Id="1169" Count="0" />
       <LineId Id="1444" Count="0" />
       <LineId Id="1359" Count="0" />
       <LineId Id="1180" Count="0" />
-      <LineId Id="1171" Count="0" />
-      <LineId Id="1369" Count="0" />
-      <LineId Id="1860" Count="0" />
-      <LineId Id="1370" Count="0" />
-      <LineId Id="1364" Count="0" />
-      <LineId Id="1861" Count="0" />
-      <LineId Id="1859" Count="0" />
-      <LineId Id="1174" Count="1" />
-      <LineId Id="1452" Count="0" />
-      <LineId Id="1178" Count="0" />
-      <LineId Id="1862" Count="0" />
+      <LineId Id="2282" Count="17" />
       <LineId Id="1170" Count="0" />
       <LineId Id="1445" Count="1" />
       <LineId Id="1191" Count="1" />
       <LineId Id="1204" Count="1" />
+      <LineId Id="2383" Count="0" />
       <LineId Id="1867" Count="0" />
       <LineId Id="1865" Count="0" />
       <LineId Id="1869" Count="0" />
@@ -706,6 +770,7 @@ END_CASE
       <LineId Id="1447" Count="1" />
       <LineId Id="1291" Count="0" />
       <LineId Id="1299" Count="0" />
+      <LineId Id="2142" Count="1" />
       <LineId Id="1096" Count="0" />
     </LineIds>
     <LineIds Name="MAIN.InitializeUtilityLibrary">

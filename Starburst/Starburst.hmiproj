@@ -27,7 +27,7 @@
     <HmiViewportUserScaleable>Default</HmiViewportUserScaleable>
     <HmiPostProcessing>True</HmiPostProcessing>
     <Name>Starburst</Name>
-    <HmiCommunicationRouterPort>10109</HmiCommunicationRouterPort>
+    <HmiCommunicationRouterPort>10110</HmiCommunicationRouterPort>
     <HmiCommunicationServerAuthPort>13001</HmiCommunicationServerAuthPort>
     <HmiInitial>1.12.760.59</HmiInitial>
     <HmiRecent>1.12.760.59</HmiRecent>
@@ -130,6 +130,15 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="Images\starbursts together.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Imports\Images\output-onlinetools %281%29.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Imports\Images\output-onlinetools %282%29.png">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Imports\Images\red-x-red-x-11563060665ltfumg5kvi.png">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Pendant.view">
