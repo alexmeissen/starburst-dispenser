@@ -5,7 +5,7 @@
   "startupView": "Desktop.view",
   "loginPage": "",
   "tcHmiServer": {
-    "websocketIntervalTime": 50,
+    "websocketIntervalTime": 10,
     "websocketTimeout": 20000,
     "websocketSystemTimeout": 60000,
     "websocketSubscriptionMode": "Change"
@@ -101,6 +101,24 @@
       "pickup_enabled": {
         "value": true,
         "type": "tchmi:general#/definitions/BOOL",
+        "persist": false,
+        "readonly": false
+      },
+      "red_count": {
+        "value": 0,
+        "type": "tchmi:general#/definitions/INT",
+        "persist": false,
+        "readonly": false
+      },
+      "yellow_count": {
+        "value": 0,
+        "type": "tchmi:general#/definitions/INT",
+        "persist": false,
+        "readonly": false
+      },
+      "pink_count": {
+        "value": 0,
+        "type": "tchmi:general#/definitions/INT",
         "persist": false,
         "readonly": false
       }

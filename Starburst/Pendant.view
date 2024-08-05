@@ -16,7 +16,7 @@
 }
 </script>
 </div>
-<div id="TcHmiButton_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="8" data-tchmi-height-unit="%" data-tchmi-left="57.0" data-tchmi-left-unit="%" data-tchmi-text="Place Order" data-tchmi-top="26.9" data-tchmi-top-unit="%" data-tchmi-width="30" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-state-symbol="%s%Base Project.MAIN.bconfirm_order%/s%" data-tchmi-zindex="1" data-tchmi-text-font-size="140" data-tchmi-is-enabled="%i%buttonEnabled%/i%" data-tchmi-text-font-size-unit="%">
+<div id="TcHmiButton_6" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="8" data-tchmi-height-unit="%" data-tchmi-left="57.0" data-tchmi-left-unit="%" data-tchmi-text="Place Order" data-tchmi-top="26.9" data-tchmi-top-unit="%" data-tchmi-width="30" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-zindex="1" data-tchmi-text-font-size="140" data-tchmi-is-enabled="%i%buttonEnabled%/i%" data-tchmi-text-font-size-unit="%">
 
 <script data-tchmi-target-attribute="data-tchmi-text-color" type="application/json">
 {
@@ -60,7 +60,7 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_3::Value%/ctrl%"
+          "symbolExpression": "%i%red_count%/i%"
         },
         "asyncWait": true
       },
@@ -71,7 +71,7 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_4::Value%/ctrl%"
+          "symbolExpression": "%i%yellow_count%/i%"
         },
         "asyncWait": true
       },
@@ -82,7 +82,18 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_5::Value%/ctrl%"
+          "symbolExpression": "%i%pink_count%/i%"
+        },
+        "asyncWait": true
+      },
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%s%Base Project.MAIN.bconfirm_order%/s%",
+        "value": {
+          "objectType": "StaticValue",
+          "valueType": "tchmi:general#/definitions/BOOL",
+          "value": true
         },
         "asyncWait": true
       }
@@ -110,33 +121,11 @@
       {
         "objectType": "WriteToSymbol",
         "active": true,
-        "symbolExpression": "%s%Base Project.MAIN.red%/s%",
+        "symbolExpression": "%i%red_count%/i%",
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/String",
           "symbolExpression": "%ctrl%TcHmiSpinboxInput_3::Value%/ctrl%"
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%s%Base Project.MAIN.orange%/s%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_4::Value%/ctrl%"
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%s%Base Project.MAIN.pink%/s%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_5::Value%/ctrl%"
         },
         "asyncWait": true
       }
@@ -192,48 +181,7 @@
 </script>
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
-  {
-    "event": "TcHmiSpinboxInput_4.onValueChanged",
-    "actions": [
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%s%Base Project.MAIN.orange%/s%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_4::Value%/ctrl%"
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%s%Base Project.MAIN.pink%/s%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_5::Value%/ctrl%"
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%s%Base Project.MAIN.red%/s%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_3::Value%/ctrl%"
-        },
-        "asyncWait": true
-      }
-    ]
-  }
-]
-</script>
+
 
 
 
@@ -248,6 +196,27 @@
   "color": "rgba(0, 0, 0, 1)"
 }
 </script>
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "TcHmiSpinboxInput_4.onValueChanged",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%i%yellow_count%/i%",
+        "value": {
+          "objectType": "Symbol",
+          "valueType": "tchmi:general#/definitions/String",
+          "symbolExpression": "%ctrl%TcHmiSpinboxInput_4::Value%/ctrl%"
+        },
+        "asyncWait": true
+      }
+    ]
+  }
+]
+</script>
 </div>
 <div id="TcHmiSpinboxInput_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiSpinboxInput" data-tchmi-auto-focus-out="true" data-tchmi-decimal-digits="0" data-tchmi-height="7" data-tchmi-height-unit="%" data-tchmi-left="16.3" data-tchmi-left-unit="%" data-tchmi-max-value="3" data-tchmi-min-value="0" data-tchmi-reset-to-last-valid-value="true" data-tchmi-top-unit="%" data-tchmi-value-horizontal-alignment="Center" data-tchmi-width="25" data-tchmi-width-unit="%" data-tchmi-zindex="1" data-tchmi-top="46.3" data-tchmi-value="0">
 <script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
@@ -260,48 +229,7 @@
 </script>
 
 
-<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
-[
-  {
-    "event": "TcHmiSpinboxInput_5.onValueChanged",
-    "actions": [
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%s%Base Project.MAIN.pink%/s%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_5::Value%/ctrl%"
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%s%Base Project.MAIN.red%/s%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_3::Value%/ctrl%"
-        },
-        "asyncWait": true
-      },
-      {
-        "objectType": "WriteToSymbol",
-        "active": true,
-        "symbolExpression": "%s%Base Project.MAIN.orange%/s%",
-        "value": {
-          "objectType": "Symbol",
-          "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%ctrl%TcHmiSpinboxInput_4::Value%/ctrl%"
-        },
-        "asyncWait": true
-      }
-    ]
-  }
-]
-</script>
+
 
 <script data-tchmi-target-attribute="data-tchmi-input-background-color" type="application/json">
 {
@@ -315,6 +243,27 @@
 {
   "color": "rgba(0, 0, 0, 1)"
 }
+</script>
+
+<script data-tchmi-target-attribute="data-tchmi-trigger" type="application/json">
+[
+  {
+    "event": "TcHmiSpinboxInput_5.onValueChanged",
+    "actions": [
+      {
+        "objectType": "WriteToSymbol",
+        "active": true,
+        "symbolExpression": "%i%pink_count%/i%",
+        "value": {
+          "objectType": "Symbol",
+          "valueType": "tchmi:general#/definitions/String",
+          "symbolExpression": "%ctrl%TcHmiSpinboxInput_5::Value%/ctrl%"
+        },
+        "asyncWait": true
+      }
+    ]
+  }
+]
 </script>
 </div>
 <div id="TcHmiButton_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="8" data-tchmi-height-unit="%" data-tchmi-left="57.0" data-tchmi-left-unit="%" data-tchmi-text="Confirm Pick Up" data-tchmi-top="40.1" data-tchmi-top-unit="%" data-tchmi-width="30" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-state-symbol="%s%Base Project.MAIN.bpicked_up%/s%" data-tchmi-zindex="1" data-tchmi-text-font-size="140" data-tchmi-is-enabled="%i%pickup_enabled%/i%" data-tchmi-text-font-size-unit="%">
@@ -346,7 +295,7 @@
 ]
 </script>
 </div>
-<div id="TcHmiTextblock_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="3.6" data-tchmi-height-unit="%" data-tchmi-left="45.8" data-tchmi-left-unit="%" data-tchmi-top="67.8" data-tchmi-top-unit="%" data-tchmi-width="30.0" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-text="%i%Order_state%/i%" data-tchmi-zindex="1" data-tchmi-text-font-size="160" data-tchmi-text-font-size-unit="%">
+<div id="TcHmiTextblock_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="3.6" data-tchmi-height-unit="%" data-tchmi-left="43.8" data-tchmi-left-unit="%" data-tchmi-top="67.8" data-tchmi-top-unit="%" data-tchmi-width="30.0" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-text="%i%Order_state%/i%" data-tchmi-zindex="1" data-tchmi-text-font-size="160" data-tchmi-text-font-size-unit="%">
 
 
 
