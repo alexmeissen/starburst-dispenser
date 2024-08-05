@@ -1,8 +1,8 @@
 <div id="Desktop_1" data-tchmi-type="TcHmi.Controls.System.TcHmiView" data-tchmi-top="0" data-tchmi-left="0" data-tchmi-width-mode="Content" data-tchmi-min-width="100" data-tchmi-min-width-unit="%" data-tchmi-height-mode="Content" data-tchmi-min-height="100" data-tchmi-min-height-unit="%">
-  <div id="ViewDesktopBeckhoffLogo_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-src="Images/Beckhoff_Logo.svg" data-tchmi-left="57" data-tchmi-top="31" data-tchmi-width="251" data-tchmi-height="86">
+  <div id="ViewDesktopBeckhoffLogo_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-src="Images/Beckhoff_Logo.svg" data-tchmi-left="10.7" data-tchmi-top="4.5" data-tchmi-width="35.2" data-tchmi-height="16.6" data-tchmi-width-unit="%" data-tchmi-height-unit="%" data-tchmi-left-unit="%" data-tchmi-top-unit="%">
 
   </div>
-<div id="TcHmiButton_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="100" data-tchmi-height-unit="px" data-tchmi-left="46" data-tchmi-left-unit="px" data-tchmi-text="Enable" data-tchmi-top="180" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-state-symbol="%s%Base Project.MAIN.MainCommands.Enable%/s%" data-tchmi-text-font-size="20">
+<div id="TcHmiButton_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="15" data-tchmi-height-unit="%" data-tchmi-left="4.6" data-tchmi-left-unit="%" data-tchmi-text="Enable" data-tchmi-top="30.0" data-tchmi-top-unit="%" data-tchmi-width="16" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-state-symbol="%s%Base Project.MAIN.MainCommands.Enable%/s%" data-tchmi-text-font-size="200" data-tchmi-text-font-size-unit="%">
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
@@ -16,7 +16,7 @@
 }
 </script>
 </div>
-<div id="TcHmiButton_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="100" data-tchmi-height-unit="px" data-tchmi-left="220" data-tchmi-left-unit="px" data-tchmi-text="Start" data-tchmi-top="180" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-state-symbol="%s%Base Project.MAIN.MainCommands.Start%/s%" data-tchmi-text-font-size="20">
+<div id="TcHmiButton_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="15" data-tchmi-height-unit="%" data-tchmi-left="27.4" data-tchmi-left-unit="%" data-tchmi-text="Start" data-tchmi-top="30.0" data-tchmi-top-unit="%" data-tchmi-width="16" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-state-symbol="%s%Base Project.MAIN.MainCommands.Start%/s%" data-tchmi-text-font-size="200" data-tchmi-text-font-size-unit="%">
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
@@ -30,7 +30,7 @@
 }
 </script>
 </div>
-<div id="TcHmiButton_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="100" data-tchmi-height-unit="px" data-tchmi-left="421" data-tchmi-left-unit="px" data-tchmi-text="Stop" data-tchmi-top="180" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-state-symbol="%s%Base Project.MAIN.MainCommands.Stop%/s%" data-tchmi-text-font-size="20">
+<div id="TcHmiButton_4" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="15" data-tchmi-height-unit="%" data-tchmi-left="53.8" data-tchmi-left-unit="%" data-tchmi-text="Stop" data-tchmi-top="30.0" data-tchmi-top-unit="%" data-tchmi-width="16" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-state-symbol="%s%Base Project.MAIN.MainCommands.Stop%/s%" data-tchmi-text-font-size="200" data-tchmi-text-font-size-unit="%">
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
@@ -44,7 +44,7 @@
 }
 </script>
 </div>
-<div id="TcHmiButton_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="100" data-tchmi-height-unit="px" data-tchmi-left="615" data-tchmi-left-unit="px" data-tchmi-text="Disable" data-tchmi-top="180" data-tchmi-top-unit="px" data-tchmi-width="120" data-tchmi-width-unit="px" data-tchmi-word-wrap="true" data-tchmi-state-symbol="%s%Base Project.MAIN.MainCommands.Disable%/s%" data-tchmi-text-font-size="20">
+<div id="TcHmiButton_5" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="15" data-tchmi-height-unit="%" data-tchmi-left="76.3" data-tchmi-left-unit="%" data-tchmi-text="Disable" data-tchmi-top="30.0" data-tchmi-top-unit="%" data-tchmi-width="16" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-state-symbol="%s%Base Project.MAIN.MainCommands.Disable%/s%" data-tchmi-text-font-size="200" data-tchmi-text-font-size-unit="%">
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
@@ -64,8 +64,10 @@
   "color": "rgba(255, 255, 255, 1)"
 }
 </script>
-<div id="TcHmi_Controls_Beckhoff_TcHmiImage_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="97" data-tchmi-height-unit="px" data-tchmi-left="473" data-tchmi-left-unit="px" data-tchmi-src="Imports/Images/output-onlinetools (1).png" data-tchmi-top="20" data-tchmi-top-unit="px" data-tchmi-width="253" data-tchmi-width-unit="px">
+<div id="TcHmi_Controls_Beckhoff_TcHmiImage_1" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="20.0" data-tchmi-height-unit="%" data-tchmi-left="55.7" data-tchmi-left-unit="%" data-tchmi-src="Imports/Images/output-onlinetools (1).png" data-tchmi-top="2.4" data-tchmi-top-unit="%" data-tchmi-width="36.8" data-tchmi-width-unit="%">
 </div>
-<div id="TcHmi_Controls_Beckhoff_TcHmiImage_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="61" data-tchmi-height-unit="px" data-tchmi-left="361" data-tchmi-left-unit="px" data-tchmi-src="Imports/Images/output-onlinetools (2).png" data-tchmi-top="44" data-tchmi-top-unit="px" data-tchmi-width="55" data-tchmi-width-unit="px">
+<div id="TcHmi_Controls_Beckhoff_TcHmiImage_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="9.4" data-tchmi-height-unit="%" data-tchmi-left="45.9" data-tchmi-left-unit="%" data-tchmi-src="Imports/Images/output-onlinetools (2).png" data-tchmi-top="8.2" data-tchmi-top-unit="%" data-tchmi-width="6.1" data-tchmi-width-unit="%">
+</div>
+<div id="TcHmi_Controls_Beckhoff_TcHmiImage_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="40.5" data-tchmi-height-unit="%" data-tchmi-left="30.2" data-tchmi-left-unit="%" data-tchmi-src="Imports/Images/Untitled.svg" data-tchmi-top="51.7" data-tchmi-top-unit="%" data-tchmi-width="39.6" data-tchmi-width-unit="%">
 </div>
 </div>

@@ -5,7 +5,7 @@
   "startupView": "Desktop.view",
   "loginPage": "",
   "tcHmiServer": {
-    "websocketIntervalTime": 500,
+    "websocketIntervalTime": 50,
     "websocketTimeout": 20000,
     "websocketSystemTimeout": 60000,
     "websocketSubscriptionMode": "Change"
@@ -81,7 +81,7 @@
   "symbols": {
     "internal": {
       "currentorder": {
-        "value": 0,
+        "value": -1,
         "type": "tchmi:general#/definitions/INT",
         "persist": false,
         "readonly": false
@@ -89,6 +89,18 @@
       "Order_state": {
         "value": "Undefined",
         "type": "tchmi:general#/definitions/String",
+        "persist": false,
+        "readonly": false
+      },
+      "buttonEnabled": {
+        "value": true,
+        "type": "tchmi:general#/definitions/BOOL",
+        "persist": false,
+        "readonly": false
+      },
+      "pickup_enabled": {
+        "value": true,
+        "type": "tchmi:general#/definitions/BOOL",
         "persist": false,
         "readonly": false
       }

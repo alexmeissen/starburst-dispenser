@@ -419,6 +419,7 @@ CASE MainState OF
 		
 			// Once picked up, move back to starting station
             IF bpicked_up THEN
+				order_num_signal := 0;
 				update := FALSE;
 				// Ping signal to Orders.queue[Orders.first_order] for that order_num
                 Station[4].CurrentMover.SetVelocity(1000);
@@ -757,6 +758,7 @@ END_CASE
       <LineId Id="1864" Count="0" />
       <LineId Id="1863" Count="0" />
       <LineId Id="1206" Count="0" />
+      <LineId Id="2386" Count="0" />
       <LineId Id="1554" Count="0" />
       <LineId Id="1556" Count="0" />
       <LineId Id="1207" Count="3" />

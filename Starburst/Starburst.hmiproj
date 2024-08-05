@@ -141,6 +141,9 @@
     <Content Include="Imports\Images\red-x-red-x-11563060665ltfumg5kvi.png">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Imports\Images\Untitled.svg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Pendant.view">
       <SubType>Content</SubType>
     </Content>
