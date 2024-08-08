@@ -8,7 +8,7 @@
      data-tchmi-background-image-height="100" data-tchmi-background-image-width="100"
      data-tchmi-background-image-height-unit="%" data-tchmi-background-image-width-unit="%" data-tchmi-zindex="1" data-tchmi-creator-viewport-width="400" data-tchmi-creator-viewport-height="900">
 
-<div id="ViewDesktopBeckhoffLogo_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-src="Images/Beckhoff_Logo.svg" data-tchmi-left="11.0" data-tchmi-top="3.7" data-tchmi-width="46.0" data-tchmi-height="11.1" data-tchmi-zindex="1" data-tchmi-width-unit="%" data-tchmi-height-unit="%" data-tchmi-left-unit="%" data-tchmi-top-unit="%">
+<div id="ViewDesktopBeckhoffLogo_2" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-src="Images/Beckhoff_Logo.svg" data-tchmi-left="11.0" data-tchmi-top="5.9" data-tchmi-width="46.0" data-tchmi-height="11.1" data-tchmi-zindex="1" data-tchmi-width-unit="%" data-tchmi-height-unit="%" data-tchmi-left-unit="%" data-tchmi-top-unit="%">
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
@@ -38,8 +38,49 @@
         "value": {
           "objectType": "Symbol",
           "valueType": "tchmi:general#/definitions/String",
-          "symbolExpression": "%f%%s%Base Project.GVL.order_number%/s% - 1%/f%"
+          "symbolExpression": "%f%%s%Base Project.GVL.order_number%/s%%/f%"
         },
+        "asyncWait": true
+      },
+      {
+        "objectType": "Condition",
+        "active": true,
+        "parts": [
+          {
+            "if": [
+              {
+                "compare1": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/INT",
+                  "symbolExpression": "%i%currentorder%/i%"
+                },
+                "compare2": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/INT",
+                  "value": -1
+                },
+                "compareOperator": "!=",
+                "logic": null
+              }
+            ],
+            "then": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%i%visible%/i%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "value": "Visible"
+                },
+                "asyncWait": true
+              }
+            ]
+          },
+          {
+            "else": []
+          }
+        ],
         "asyncWait": true
       },
       {
@@ -102,7 +143,7 @@
 ]
 </script>
 </div>
-<div id="TcHmiSpinboxInput_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiSpinboxInput" data-tchmi-auto-focus-out="true" data-tchmi-decimal-digits="0" data-tchmi-height="7" data-tchmi-height-unit="%" data-tchmi-left="16.3" data-tchmi-left-unit="%" data-tchmi-max-value="3" data-tchmi-min-value="0" data-tchmi-reset-to-last-valid-value="true" data-tchmi-top-unit="%" data-tchmi-value-horizontal-alignment="Center" data-tchmi-width="25" data-tchmi-width-unit="%" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-zindex="1" data-tchmi-top="21.9" data-tchmi-value="0">
+<div id="TcHmiSpinboxInput_3" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiSpinboxInput" data-tchmi-auto-focus-out="true" data-tchmi-decimal-digits="0" data-tchmi-height="7" data-tchmi-height-unit="%" data-tchmi-left="16.3" data-tchmi-left-unit="%" data-tchmi-max-value="3" data-tchmi-min-value="0" data-tchmi-reset-to-last-valid-value="true" data-tchmi-top-unit="%" data-tchmi-value-horizontal-alignment="Center" data-tchmi-width="25.0" data-tchmi-width-unit="%" data-tchmi-background-image-horizontal-alignment="Center" data-tchmi-zindex="1" data-tchmi-top="22.4" data-tchmi-value="0" data-tchmi-width-mode="Value">
 <script data-tchmi-target-attribute="data-tchmi-content-padding" type="application/json">
 {
   "top": 3,
@@ -266,7 +307,7 @@
 ]
 </script>
 </div>
-<div id="TcHmiButton_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="8" data-tchmi-height-unit="%" data-tchmi-left="57.0" data-tchmi-left-unit="%" data-tchmi-text="Confirm Pick Up" data-tchmi-top="40.1" data-tchmi-top-unit="%" data-tchmi-width="30" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-state-symbol="%s%Base Project.MAIN.bpicked_up%/s%" data-tchmi-zindex="1" data-tchmi-text-font-size="140" data-tchmi-is-enabled="%i%pickup_enabled%/i%" data-tchmi-text-font-size-unit="%">
+<div id="TcHmiButton_7" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiButton" data-tchmi-height="8" data-tchmi-height-unit="%" data-tchmi-left="57.0" data-tchmi-left-unit="%" data-tchmi-text="Confirm Pick Up" data-tchmi-top="40.1" data-tchmi-top-unit="%" data-tchmi-width="30" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-zindex="1" data-tchmi-text-font-size="140" data-tchmi-is-enabled="%i%pickup_enabled%/i%" data-tchmi-text-font-size-unit="%">
 
 <script data-tchmi-target-attribute="data-tchmi-text-color" type="application/json">
 {
@@ -280,14 +321,89 @@
     "event": "TcHmiButton_7.onPressed",
     "actions": [
       {
-        "objectType": "WriteToSymbol",
+        "objectType": "Condition",
         "active": true,
-        "symbolExpression": "%i%pickup_enabled%/i%",
-        "value": {
-          "objectType": "StaticValue",
-          "valueType": "tchmi:general#/definitions/BOOL",
-          "value": false
-        },
+        "parts": [
+          {
+            "if": [
+              {
+                "compare1": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/INT",
+                  "symbolExpression": "%i%currentorder%/i%"
+                },
+                "compare2": {
+                  "objectType": "Symbol",
+                  "valueType": "tchmi:general#/definitions/String",
+                  "symbolExpression": "%s%Base Project.MAIN.order_num_signal%/s%"
+                },
+                "compareOperator": "==",
+                "logic": null
+              }
+            ],
+            "then": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%Base Project.MAIN.bpicked_up%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "value": true
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%i%pickup_enabled%/i%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "value": false
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%Base Project.MAIN.bpicked_up%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "value": false
+                },
+                "asyncWait": true
+              }
+            ]
+          },
+          {
+            "else": [
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%s%Base Project.MAIN.bpicked_up%/s%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "value": false
+                },
+                "asyncWait": true
+              },
+              {
+                "objectType": "WriteToSymbol",
+                "active": true,
+                "symbolExpression": "%i%pickup_enabled%/i%",
+                "value": {
+                  "objectType": "StaticValue",
+                  "valueType": "tchmi:general#/definitions/BOOL",
+                  "value": true
+                },
+                "asyncWait": true
+              }
+            ]
+          }
+        ],
         "asyncWait": true
       }
     ]
@@ -295,7 +411,7 @@
 ]
 </script>
 </div>
-<div id="TcHmiTextblock_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="3.6" data-tchmi-height-unit="%" data-tchmi-left="43.8" data-tchmi-left-unit="%" data-tchmi-top="67.8" data-tchmi-top-unit="%" data-tchmi-width="30.0" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-text="%i%Order_state%/i%" data-tchmi-zindex="1" data-tchmi-text-font-size="160" data-tchmi-text-font-size-unit="%">
+<div id="TcHmiTextblock_8" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="4.6" data-tchmi-height-unit="%" data-tchmi-left="43.8" data-tchmi-left-unit="%" data-tchmi-top="69.3" data-tchmi-top-unit="%" data-tchmi-width="31.9" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-text="%i%Order_state%/i%" data-tchmi-zindex="1" data-tchmi-text-font-size="160" data-tchmi-text-font-size-unit="%">
 
 
 
@@ -362,11 +478,11 @@
 ]
 </script>
 </div>
-<div id="TcHmi_Controls_Beckhoff_TcHmiImage" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="21.5" data-tchmi-height-unit="%" data-tchmi-left="52.0" data-tchmi-left-unit="%" data-tchmi-src="Images/starbursts together.png" data-tchmi-top="4.3" data-tchmi-top-unit="%" data-tchmi-width="38.8" data-tchmi-width-unit="%" data-tchmi-zindex="1">
+<div id="TcHmi_Controls_Beckhoff_TcHmiImage" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiImage" data-tchmi-height="21.5" data-tchmi-height-unit="%" data-tchmi-left="52.8" data-tchmi-left-unit="%" data-tchmi-src="Images/starbursts together.png" data-tchmi-top="6.7" data-tchmi-top-unit="%" data-tchmi-width="38.8" data-tchmi-width-unit="%" data-tchmi-zindex="1">
 </div>
 <div id="TcHmiTextblock_9" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="4.6" data-tchmi-height-unit="%" data-tchmi-left="13.5" data-tchmi-left-unit="%" data-tchmi-text="     Your order number is: 
 
-" data-tchmi-top="62.1" data-tchmi-top-unit="%" data-tchmi-width="62.3" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-zindex="1" data-tchmi-text-font-size="160" data-tchmi-text-font-size-unit="%">
+" data-tchmi-top="62.2" data-tchmi-top-unit="%" data-tchmi-width="62.3" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-zindex="1" data-tchmi-text-font-size="160" data-tchmi-text-font-size-unit="%">
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
@@ -374,7 +490,7 @@
 }
 </script>
 </div>
-<div id="TcHmiTextblock_10" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="3.6" data-tchmi-height-unit="%" data-tchmi-left="13.5" data-tchmi-left-unit="%" data-tchmi-text="     Your order is " data-tchmi-top="67.8" data-tchmi-top-unit="%" data-tchmi-width="62.3" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-zindex="0" data-tchmi-text-font-size="160" data-tchmi-text-font-size-unit="%">
+<div id="TcHmiTextblock_10" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="4.6" data-tchmi-height-unit="%" data-tchmi-left="13.5" data-tchmi-left-unit="%" data-tchmi-text="     Your order is " data-tchmi-top="69.3" data-tchmi-top-unit="%" data-tchmi-width="62.3" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-zindex="0" data-tchmi-text-font-size="160" data-tchmi-text-font-size-unit="%">
 
 <script data-tchmi-target-attribute="data-tchmi-background-color" type="application/json">
 {
@@ -388,6 +504,6 @@
   "color": "rgba(244, 16, 81, 1)"
 }
 </script>
-<div id="TcHmiTextblock_12" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="4.6" data-tchmi-height-unit="%" data-tchmi-left="61.5" data-tchmi-left-unit="%" data-tchmi-text="%i%currentorder%/i%" data-tchmi-top="62.1" data-tchmi-top-unit="%" data-tchmi-width="19.1" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-text-font-size="160" data-tchmi-zindex="2" data-tchmi-text-font-size-unit="%">
+<div id="TcHmiTextblock_12" data-tchmi-type="TcHmi.Controls.Beckhoff.TcHmiTextblock" data-tchmi-height="4.6" data-tchmi-height-unit="%" data-tchmi-left="61.0" data-tchmi-left-unit="%" data-tchmi-text="%i%currentorder%/i%" data-tchmi-top="62.2" data-tchmi-top-unit="%" data-tchmi-width="19.1" data-tchmi-width-unit="%" data-tchmi-word-wrap="true" data-tchmi-text-font-size="160" data-tchmi-zindex="2" data-tchmi-text-font-size-unit="%" data-tchmi-is-enabled="true" data-tchmi-visibility="%i%visible%/i%">
 </div>
 </div>

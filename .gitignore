@@ -55,3 +55,7 @@ _ModuleInstall/
 *.plcproj.orig
 Documentation/site/
 XTS_Samples.pptx
+
+# TwinCAT HMI, filter downloaded JSON schema files
+json-schema.org
+

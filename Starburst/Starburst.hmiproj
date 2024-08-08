@@ -31,7 +31,7 @@
     <HmiCommunicationServerAuthPort>13001</HmiCommunicationServerAuthPort>
     <HmiInitial>1.12.760.59</HmiInitial>
     <HmiRecent>1.12.760.59</HmiRecent>
-    <HmiServerNodeAdvancedView>False</HmiServerNodeAdvancedView>
+    <HmiServerNodeAdvancedView>True</HmiServerNodeAdvancedView>
   </PropertyGroup>
   <PropertyGroup>
     <TwinCATHmi_Tasks>$(TcHmiDirectory)\MSBuild\Beckhoff.TwinCAT.HMI.tasks</TwinCATHmi_Tasks>
@@ -141,6 +141,9 @@
     <Content Include="Imports\Images\red-x-red-x-11563060665ltfumg5kvi.png">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Imports\Images\Screenshot 2024-08-08 093452.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Imports\Images\Untitled.svg">
       <SubType>Content</SubType>
     </Content>
@@ -156,6 +159,7 @@
     <Folder Include="KeyboardLayouts\" />
     <Folder Include="Localization" />
     <Folder Include="CustomFunctions" />
+    <Folder Include="Server\TcXtsHmiServerExtension" />
     <Folder Include="Themes" />
     <Folder Include="Themes\Base-Dark\Images\" />
     <Folder Include="Themes\Base\" />
@@ -205,6 +209,15 @@
     <Content Include="Server\TcHmiUserManagement\TcHmiUserManagement.Storage.json">
       <SubType>Content</SubType>
       <Visible>True</Visible>
+    </Content>
+    <Content Include="Server\TcXtsHmiServerExtension\TcXtsHmiServerExtension.Config.default.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcXtsHmiServerExtension\TcXtsHmiServerExtension.Config.remote.json">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Server\TcXtsHmiServerExtension\TcXtsHmiServerExtension.Storage.json">
+      <SubType>Content</SubType>
     </Content>
     <Content Include="tsconfig.tpl.json">
       <SubType>Content</SubType>

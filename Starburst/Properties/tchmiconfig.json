@@ -121,6 +121,12 @@
         "type": "tchmi:general#/definitions/INT",
         "persist": false,
         "readonly": false
+      },
+      "visible": {
+        "value": "Hidden",
+        "type": "tchmi:general#/definitions/String",
+        "persist": false,
+        "readonly": false
       }
     },
     "themedResources": {}
@@ -262,6 +268,10 @@
     {
       "name": "Beckhoff.TwinCAT.HMI.Functions",
       "basePath": "/Beckhoff.TwinCAT.HMI.Functions"
+    },
+    {
+      "name": "Beckhoff.TwinCAT.HMI.XTS.Controls",
+      "basePath": "/Beckhoff.TwinCAT.HMI.XTS.Controls"
     }
   ],
   "keyboardLayouts": [

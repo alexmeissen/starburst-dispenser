@@ -286,15 +286,15 @@ CASE MainState OF
 			hmi_order.red := red;
 			hmi_order.orange := orange;
 			hmi_order.pink := pink;
-			
+			GVL.order_number := GVL.order_number + 1;
 			
 			//enqueues order
 			Orders.ENQUEUE(hmi_order);
 			// sets temporary variable holding the order information for the mover
 			current_order := Orders.order;
-			bconfirm_order := FALSE;
 			//number := hmi_order.order_num;
-			GVL.order_number := GVL.order_number + 1;
+			
+			bconfirm_order := FALSE;
 		END_IF
 		
 		
@@ -400,7 +400,6 @@ CASE MainState OF
 		//Station 4 logic for pickup station
 		IF Station[4].MoverInPosition THEN
             
-			update := TRUE;
 			temp := Station[4].CurrentMover.Payload;
 			order_num_signal := temp.Order_Num;
 			
@@ -408,7 +407,7 @@ CASE MainState OF
 			// Once picked up, move back to starting station
             IF bpicked_up THEN
 				order_num_signal := 0;
-				update := FALSE;
+				
 				// Ping signal to Orders.queue[Orders.first_order] for that order_num
                 Station[4].CurrentMover.SetVelocity(1000);
                 Station[4].CurrentMover.MoveToStation(Station[0]);
@@ -666,9 +665,9 @@ END_CASE
       <LineId Id="1774" Count="0" />
       <LineId Id="1854" Count="0" />
       <LineId Id="1776" Count="0" />
-      <LineId Id="1778" Count="0" />
       <LineId Id="1940" Count="0" />
       <LineId Id="2066" Count="0" />
+      <LineId Id="2558" Count="0" />
       <LineId Id="1768" Count="0" />
       <LineId Id="1760" Count="0" />
       <LineId Id="1755" Count="0" />
@@ -728,7 +727,6 @@ END_CASE
       <LineId Id="1445" Count="1" />
       <LineId Id="1191" Count="1" />
       <LineId Id="1204" Count="1" />
-      <LineId Id="2383" Count="0" />
       <LineId Id="1867" Count="0" />
       <LineId Id="1865" Count="0" />
       <LineId Id="1869" Count="0" />
